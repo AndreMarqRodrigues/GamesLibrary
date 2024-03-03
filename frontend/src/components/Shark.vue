@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         getResponse(){
-            const path = 'http://localhost:8080/shark'
+            const path = 'http://127.0.0.1:5000/shark'
             axios.get(path).then((res => {
                 console.log(res.data)
                 this.msg = res.data
@@ -30,3 +30,4 @@ export default {
     }
 }
 </script>
+
