@@ -1,17 +1,27 @@
 // src/router.js
 import { createRouter, createWebHistory } from 'vue-router';
-import Shark from "../components/Shark.vue";
-import Games from "../components/Games.vue"
-const routes = [
-  {
-    path: '/shark',
-    name: 'Shark',
-    component: Shark,
-  },  
+import Games from "../components/Games.vue";
+import Home from "../components/Home.vue";
+import Login from "../components/Login.vue";
+import Register from "../components/Register.vue";
+
+const routes = [  
   {
     path: '/games',
     name: 'Games',
     component: Games,
+  },{
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },{
+    path: '/login',
+    name: 'login',
+    component: Login
+  },{
+    path: '/register',
+    name: 'register',
+    component : Register
   }
 ];
 

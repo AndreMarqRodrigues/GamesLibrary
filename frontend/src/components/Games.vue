@@ -1,19 +1,17 @@
 <template>
   <div class="jumbotron vertical-center">
     <div class="container">
-
       <!--bootswatch CDN-->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">
       <div class="row">
         <div class="col-sm-12">
-          <hr><br><h1 class="text-center bg-primary text-white" style="border-radius: 10px;">Games Library🕹️</h1>
+          <hr><br><h1 class="text-center bg-primary text-white" style="border-radius: 20px; margin-top: -2rem;">Games Library</h1>
           <!--Alert Message-->
           <div class="alert alert-success" role="alert" v-if="showMessage">{{ message }}</div>
           <!--Button to trigger modal-->
           <button type="button" class="btn btn-success" @click="showAddModal">
           Add Game
           </button>
-          
           <br><br>
           <table class="table table-hover">
             <!--Table Head -->
@@ -21,6 +19,7 @@
               <tr>
                 <!--Table header cells-->
                 <th scope="col">Title</th>
+                <th scope="col">Time wasted:</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Played?</th>
                 <th scope="col">Actions</th>
@@ -29,6 +28,7 @@
             <tbody>
               <tr v-for="(game, index) in games" :key="index">
                 <td>{{ game.title }}</td>
+                <td>{{ game.playTime }}{{ game.playTime !== 0 && game.playTime !== "" ? 'h' : '' }}</td>
                 <td>{{ game.genre }}</td>
                 <td>{{ game.played ? 'Yes' : 'No' }}</td>
                 <td>
@@ -62,6 +62,11 @@
                 <div class="mb-3">
                   <label for="add-genre" class="form-label">Genre:</label>
                   <input type="text" class="form-control" id="add-genre" v-model="addGameForm.genre" required>
+                </div>
+                <!-- PlayTime input -->
+                <div class="mb-3">
+                  <label for="add-genre" class="form-label">Time Played:</label>
+                  <input type="number" class="form-control" id="add-genre" v-model="addGameForm.playTime">
                 </div>
                 <!-- Played checkbox -->
                 <div class="mb-3 form-check">
@@ -98,6 +103,11 @@
                   <label for="edit-genre" class="form-label">Genre:</label>
                   <input type="text" class="form-control" id="edit-genre" v-model="editGameForm.genre" required>
                 </div>
+                <!-- PlayTime input -->
+                <div class="mb-3">
+                  <label for="edit-genre" class="form-label">Time played:</label>
+                  <input type="text" class="form-control" id="edit-genre" v-model="editGameForm.playTime" required>
+                </div>
                 <!-- Played checkbox -->
                 <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input" id="edit-played" v-model="editGameForm.played">
@@ -129,12 +139,14 @@ export default {
         id: "",
         title: "",
         genre: "",
+        playTime: "",
         played: false,
       },
       editGameForm: {
         id: "",
         title: "",
         genre: "",
+        playTime: "",
         played: false,
       },
       showMessage: false,
@@ -143,9 +155,17 @@ export default {
   },
   methods: {
     getGames() {
-      const path = 'http://127.0.0.1:5000/games';
-      axios.get(path).then(res => {
-        this.games = res.data.games;
+      const token = localStorage.getItem('access_token')
+      let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'http://127.0.0.1:5000/games',
+      headers: { 
+      'Authorization': `Bearer ${token}`
+      }
+      };
+      axios.request(config).then(res => {
+      this.games = res.data.games;
       }).catch(err => {
         console.error(err);
       });

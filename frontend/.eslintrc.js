@@ -28,3 +28,5 @@ module.exports = {
         'vue/multi-word-component-names': 'off',
     }
 }
+
+
