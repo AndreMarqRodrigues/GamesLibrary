@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <navBar/>
   <div class="jumbotron vertical-center">
     <div class="container">
       <!--bootswatch CDN-->
@@ -123,12 +125,14 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
 import { nextTick } from 'vue';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import navBar from './navBarLogged.vue'
 
 export default {
   data() {
@@ -152,6 +156,9 @@ export default {
       showMessage: false,
       message: "",
     };
+  },
+  components: { 
+    navBar 
   },
   methods: {
     getGames() {

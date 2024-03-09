@@ -1,86 +1,102 @@
 <template>
-    <div class="home-page">
-      <nav class="navbar">
-        <div class="title">TITLE</div>
-        <div class="nav-links">
-          <router-link to="/login">LOGIN</router-link>
-          <router-link to="/about">ABOUT US</router-link>
-          <router-link to="/contact">CONTACT</router-link>
-        </div>
-      </nav>
-      
-      <div class="main-content">
-        <h1 class="main-title">TITLE TITLE TITLE</h1>
-        <p class="slogan">THIS IS A SLOGAN AND RESUMES THE WEBPAGE</p>
+  <div class="home-page">
+    <navBarVue/>
+    <div class="home-page content">
+    <div class="content-wrapper">
+      <div class="text-content">
+        <h1 class="main-title">GAMINGLIB</h1>
+        <p class="slogan">Get all your gaming history together. Fuse all your libraries!</p>
         <router-link to="/register">
           <button class="create-account-btn">CREATE AN ACCOUNT!</button>
         </router-link>
       </div>
-      
-      <div class="side-content">
-        <p>THIS WILL BE AN IMG.THIS WILL BE AN IMG.THIS WILL BE AN IMG...</p>
+      <div class="image-content">
+        <img src="../assets/HomePageImg.png">
       </div>
     </div>
-  </template>
+  </div>
+  </div>
+</template>
   
-  <script>
-  export default {
-    name: 'HomePage'
-    // Your script part
+<script>
+import navBarVue from './navBarNotLogged.vue';
+export default {
+  name: 'Home',
+  components:{
+    navBarVue
   }
-  </script>
+}
+</script>
+
   
-  <style scoped>
-  .home-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .nav-links a {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .main-content {
-    margin: 2rem 0;
-  }
-  
-  .main-title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .slogan {
-    margin-bottom: 2rem;
-  }
-  
-  .create-account-btn {
-    padding: 0.5rem 1rem;
-    background-color: yellow;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .side-content {
-    background-color: #000;
-    color: #fff;
-    padding: 2rem;
-    width: 50%;
-    /* Adjust the size accordingly */
-    margin: auto;
-    text-align: left;
-  }
-  </style>
+<style scoped>
+.home-page {
+  background-image: url('@/assets/HomePageBG.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.home-page-content{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+
+}
+
+img, svg {
+    vertical-align: middle;
+    border-radius: 25rem;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; 
+}
+
+.text-content {
+  flex: 1;
+  margin-right: 10rem;
+  margin-left: 10rem;
+  background-color: rgba(66,72,79,0.8);
+  border-radius: 25px; 
+}
+
+.image-content {
+  flex: 1;
+}
+
+
+.main-title {
+  font-weight: 700;
+  color: yellow;
+  font-size: 7.5rem;
+  margin-bottom: 1rem;
+  margin-left: 10rem;
+}
+
+.slogan {
+  font-weight: 700;
+  color:white;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  margin-left: 10rem;
+}
+
+.create-account-btn {
+  padding: 0.5rem 1rem;
+  background-color: yellow;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  margin-left: 25rem;
+}
+</style>
